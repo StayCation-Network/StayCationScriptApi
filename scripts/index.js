@@ -6,6 +6,7 @@ import { Ping } from "./Commands/ping";
 var logger = new Logger();
 var commandManager = new CommandManager();
 
+
 world.afterEvents.worldInitialize.subscribe((ctx) => {
     commandManager.registerCommand(new Ping())
     commandManager.setPrefix(".");

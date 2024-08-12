@@ -1,0 +1,13 @@
+
+
+
+class EventManager {
+
+    registerEvent() {
+
+    }
+
+    unregisterEvent() {
+
+    }
+}
