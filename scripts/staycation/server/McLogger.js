@@ -72,12 +72,12 @@ export class McLogger {
         const name = this.#name || "Logger";
 
         if (this.#chat) {
-            const formattedMessage = `§6[${timeDate}] [${level} ${name}]:§r ${content}`;
+            const formattedMessage = `§6[${timeDate}] [${level} ${name}]:§r ${content}`.toString();
             world.sendMessage(formattedMessage);
         }
 
         if (this.#console) {
-            const formattedMessage = `[${level} ${name}]: ${content}`;
+            const formattedMessage = `[${level} ${name}]: ${content}`.toString();
             console.warn(formattedMessage);
         }
     }
