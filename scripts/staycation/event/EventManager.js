@@ -10,8 +10,7 @@ export class EventManager {
     registerListener(listenerInstance, phase = "before") {
         const eventPhase = this.#getEventPhase(phase);
         if (!eventPhase) {
-            console.warn(`Ungültiger Phase-Wert: ${phase}. Nur 'before' und 'after' sind erlaubt.`);
-            return null;
+            throw new Error("Ungültiger Phase-Wert: ${phase}. Nur 'before' und 'after' sind erlaubt.")
         }
 
         const unsubscribe = world[eventPhase][listenerInstance.eventName].subscribe((ctx) => listenerInstance.on(ctx));

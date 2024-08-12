@@ -1,10 +1,8 @@
 import { Player, World } from "@minecraft/server";
 
 export class Command {
-    constructor(name, description, usage, aliases = []) {
+    constructor(name, aliases = []) {
         this.name = name;
-        this.description = description;
-        this.usage = usage;
         this.aliases = aliases.map(alias => alias.toLowerCase());
     }
 

@@ -1,5 +1,5 @@
 import { Server } from "../server/Server";
-import { world } from "@minecraft/server";
+import { world, system, System, World } from "@minecraft/server";
 import { EventManager } from "../event/EventManager";
 import { CommandManager } from "../command/CommandManager";
 
@@ -30,6 +30,20 @@ export class PluginBase {
      */
     getCommandManager() {
         return this.#commandManager
+    }
+
+    /**
+     * @return {System}
+     */
+    getSystem() {
+        return system;
+    }
+
+    /**
+     * @return { World }
+     */
+    getWorld() {
+        return world;
     }
 
     /**
