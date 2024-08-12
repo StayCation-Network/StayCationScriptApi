@@ -10,7 +10,7 @@ export class McLogger {
     /**
      * @param boolean {Boolean}
      */
-    enablePrintConsole(boolean) {
+    enabledPrintConsole(boolean) {
         this.#console = boolean;
     }
 
