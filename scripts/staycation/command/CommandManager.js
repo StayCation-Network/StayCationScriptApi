@@ -1,4 +1,4 @@
-import { World, Player } from "@minecraft/server";
+import { World, Player, ChatSendBeforeEvent } from "@minecraft/server";
 
 export class CommandManager {
 
@@ -47,8 +47,7 @@ export class CommandManager {
     registerCommand(command) {
         const commandName = command.name.toLowerCase();
         this.#commands[commandName] = command;
-
-        for(let i = 0; i < command.aliases; i++) {
+        for(let i = 0; i < command.aliases.length; i++) {
             const alias = command.aliases[i];
             this.#commands[alias] = command;
         }
@@ -64,7 +63,7 @@ export class CommandManager {
 
         if (command) {
             delete this.#commands[commandName];
-            for(let i = 0; i < command.aliases; i++) {
+            for(let i = 0; i < command.aliases.length; i++) {
                 const alias = command.aliases[i];
                 delete this.#commands[alias];
             }
@@ -75,12 +74,14 @@ export class CommandManager {
     }
 
     /**
-     * @param player {Player}
+     * @param event {ChatSendBeforeEvent}
      * @param world {World}
-     * @param content {String}
      * @return boolean
      */
-    handleCommand(player, world, content) {
+    handleCommand(event, world) {
+
+        let content = event.message;
+        let player = event.sender;
 
         if(this.#prefix === null) {
             throw new Error("No prefix has been specified.");
@@ -89,6 +90,8 @@ export class CommandManager {
         if(content.startsWith(this.#prefix) === false) {
             return false;
         }
+
+        event.cancel = true
 
         let args = this.#parseArgs(content.substring(this.#prefix.length));
         let commandName = args.shift().toLowerCase();

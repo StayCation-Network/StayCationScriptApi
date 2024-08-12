@@ -5,7 +5,7 @@ export class Command {
         this.name = name;
         this.description = description;
         this.usage = usage;
-        this.aliases = aliases.map(alias => alias.toLowerCase()); // Aliase in Kleinbuchstaben umwandeln
+        this.aliases = aliases.map(alias => alias.toLowerCase());
     }
 
     /**
