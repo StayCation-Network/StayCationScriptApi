@@ -1,22 +1,10 @@
-import { system, world } from "@minecraft/server";
-import { CommandManager } from  "./staycation/command/CommandManager";
-import { Logger } from "./staycation/server/Logger";
-import { Ping } from "./Commands/ping";
+import { PluginBase } from "./staycation/plugin/PluginBase"
 
-var logger = new Logger();
-var commandManager = new CommandManager();
+class Main extends PluginBase {
 
+    onInit() {
+        console.log("Hello from init")
+    }
+}
 
-world.afterEvents.worldInitialize.subscribe((ctx) => {
-    commandManager.registerCommand(new Ping())
-    commandManager.setPrefix(".");
-    logger.enabledPrintChat(true);
-    logger.enablePrintConsole(true)
-    logger.setUTCOffset(2);
-
-    logger.getLogger("Server").Info("Hello World")
-})
-
-world.beforeEvents.chatSend.subscribe((ctx) => {
-    commandManager.handleCommand(ctx, world);
-})
+new Main();

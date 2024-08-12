@@ -1,9 +1,21 @@
 import { Server } from "../server/Server";
+import { world } from "@minecraft/server";
+import {EventManager} from "../event/EventManager";
 
-class PluginBase {
+export class PluginBase {
+    #initWorld;
 
-    onEnable() {
+    constructor() {
+        this.#initWorld = world.afterEvents.worldInitialize.subscribe(() => {
+            this.onInit();
+            world.afterEvents.worldInitialize.unsubscribe(this.#initWorld);
+        });
+    }
 
+    onInit() {}
+
+    getEventManager() {
+        return new EventManager()
     }
 
     getServer() {
