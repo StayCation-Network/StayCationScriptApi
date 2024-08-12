@@ -4,6 +4,7 @@ class Main extends PluginBase {
 
     onInit() {
         console.log("Hello from init");
+        this.getServer()
     }
 }
 

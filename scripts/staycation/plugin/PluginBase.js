@@ -18,14 +18,23 @@ export class PluginBase {
 
     onInit() {}
 
+    /**
+     * @return {EventManager}
+     */
     getEventManager() {
         return this.#eventManager;
     }
 
+    /**
+     * @return {CommandManager}
+     */
     getCommandManager() {
         return this.#commandManager
     }
 
+    /**
+     * @return {Server}
+     */
     getServer() {
         return this.#server;
     }

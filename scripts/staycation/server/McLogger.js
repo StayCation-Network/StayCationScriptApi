@@ -1,10 +1,11 @@
 import { world } from "@minecraft/server";
 import { McTimeDate } from "../utils/McTimeDate";
 
-export class Logger {
+export class McLogger {
     #console = false;
     #chat = false;
     #utcOffset = 0;
+    #name = '';
 
     /**
      * @param boolean {Boolean}
@@ -29,25 +30,9 @@ export class Logger {
 
     /**
      * @param name {String}
-     * @return {log}
      */
-    getLogger(name) {
-        return new log(name, this.#chat, this.#console, this.#utcOffset);
-    }
-}
-
-class log {
-    /**
-     * @param name {String}
-     * @param chat {Boolean}
-     * @param console {Boolean}
-     * @param utcOffset {Number}
-     */
-    constructor(name, chat, console, utcOffset) {
-        this.name = name;
-        this.chat = chat;
-        this.console = console;
-        this.timeDate = new McTimeDate(utcOffset);
+    setLoggerName(name) {
+        this.#name = name;
     }
 
     /**
@@ -83,15 +68,16 @@ class log {
      * @param content {String}
      */
     #log(level, content) {
-        const timeDate = this.timeDate.getCurrentDateTime();
+        const timeDate = new McTimeDate(this.#utcOffset).getCurrentDateTime();
+        const name = this.#name || "Logger";
 
-        if (this.chat) {
-            const formattedMessage = `§6[${timeDate}] [${level} ${this.name}]:§r ${content}`;
+        if (this.#chat) {
+            const formattedMessage = `§6[${timeDate}] [${level} ${name}]:§r ${content}`;
             world.sendMessage(formattedMessage);
         }
 
-        if (this.console) {
-            const formattedMessage = `[${timeDate}] [${level} ${this.name}]: ${content}`;
+        if (this.#console) {
+            const formattedMessage = `[${timeDate}] [${level} ${name}]: ${content}`;
             console.log(formattedMessage);
         }
     }

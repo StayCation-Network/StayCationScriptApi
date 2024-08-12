@@ -1,10 +1,13 @@
-import { Logger } from "./Logger"
+import { McLogger } from "./McLogger"
 
 export class Server {
+    #logger = new McLogger();
 
-    #logger = new Logger();
-
-    Logger(){
+    /**
+     * @return {McLogger}
+     * @constructor
+     */
+    getLogger(){
         return this.#logger;
     }
 
