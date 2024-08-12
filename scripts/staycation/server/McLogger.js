@@ -77,7 +77,7 @@ export class McLogger {
         }
 
         if (this.#console) {
-            const formattedMessage = `[${timeDate}] [${level} ${name}]: ${content}`;
+            const formattedMessage = `[${level} ${name}]: ${content}`;
             console.warn(formattedMessage);
         }
     }
