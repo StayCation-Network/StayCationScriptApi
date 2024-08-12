@@ -6,5 +6,4 @@ export class Server {
         return new Logger()
     }
 
-
 }
