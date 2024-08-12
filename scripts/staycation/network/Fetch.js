@@ -13,8 +13,10 @@ import { HttpClient, HttpRequest, HttpRequestMethod, HttpHeader, HttpResponse, h
  * @return {Promise<HttpResponse>}
  */
 export async function mc_fetch(url, options = {}) {
+
     const req = new HttpRequest(url);
-    const method = options.method ? options.method.charAt(0).toUpperCase() + options.method.slice(1).toLowerCase() : HttpRequestMethod.Post;
+    const method = options.method ? options.method.charAt(0).toUpperCase() + options.method.slice(1).toLowerCase() : HttpRequestMethod.Get
+
     req.method = method;
 
     if (options.headers) {
