@@ -8,27 +8,19 @@ export class CommandManager {
     /**
      * @param content {String}
      */
-    #parseArgs = (content) => {
-        let args = [];
-        let currentArg = "";
-        let inQuotes = false;
+     #parseArgs = (content) => {
 
-        for(let i = 0; i < content.length; i++) {
-            const char = content[i];
-            if(char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ' ' && !inQuotes) {
-                if(currentArg.length > 0) {
-                    args.push(currentArg);
-                    currentArg = "";
-                }
-            } else {
-                currentArg += char;
+        const commandBody = content.slice(this.#prefix.length).trim();
+        const regex = /"([^"]*)"|(\S+)/g;
+        const args = [];
+        let match;
+
+        while ((match = regex.exec(commandBody)) !== null) {
+            if (match[1]) {
+                args.push(match[1]);
+            } else if (match[2]) {
+                args.push(match[2]);
             }
-        }
-
-        if(currentArg.length > 0) {
-            args.push(currentArg);
         }
 
         return args;
